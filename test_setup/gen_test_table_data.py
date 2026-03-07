@@ -8,10 +8,7 @@ from faker import Faker
 # ────────────────────────────────────────────────
 #   CONFIGURATION - CHANGE THESE VALUES
 # ────────────────────────────────────────────────
-DATABASE_URL = "postgresql+psycopg2://app:app@localhost:5432/ai_bi_db"
-# Examples:
-# "postgresql+psycopg2://postgres:1234@localhost:5432/analytics"
-# "postgresql+psycopg2://user:pass@192.168.1.105:5432/prod_analytics"
+DATABASE_URL = "postgresql+psycopg2://test_user:test_pwd@localhost:5433/ai_bi_db"
 
 # ────────────────────────────────────────────────
 

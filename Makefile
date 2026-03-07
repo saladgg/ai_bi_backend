@@ -35,11 +35,11 @@ venv_setup:
 
 install:
 	uv lock --prerelease=allow
-	uv sync
+	uv sync --active
 
 install-dev:
 	uv lock --prerelease=allow
-	uv sync --group dev
+	uv sync --group dev --active
 
 .PHONY: update
 update:
@@ -54,18 +54,18 @@ SOURCE = app
 .PHONY: lint format fix test
 
 lint:
-	uv run ruff check $(SOURCE)
-	uv run mypy $(SOURCE)
+	uv run ruff check $(SOURCE) 
+	uv run mypy $(SOURCE) 
 
 format:
-	uv run ruff format $(SOURCE)
+	uv run ruff format $(SOURCE) 
 
 fix:
-	uv run ruff check $(SOURCE) --fix
-	uv run ruff format $(SOURCE)
+	uv run ruff check $(SOURCE) --fix 
+	uv run ruff format $(SOURCE) 
 
 test:
-	uv run pytest
+	uv run pytest 
 
 # ----------------------------------------------------------
 # Run Application
