@@ -12,14 +12,16 @@ RATE_LIMIT = 5
 WINDOW_SECONDS = 60
 
 
-with open("app/core/lua/sliding_window_rate_limit.lua") as f:
-    RATE_LIMIT_SCRIPT = redis_client.register_script(f.read())
+def get_rate_limit_script():
+    with open("app/core/lua/sliding_window_rate_limit.lua") as f:
+        return redis_client.register_script(f.read())
 
 
 def enforce_rate_limit(request: Request) -> None:
     """
     Enforces rate limit using Redis Lua script.
     """
+    script = get_rate_limit_script()
 
     client_ip = request.headers.get(
         "X-Forwarded-For",
@@ -30,7 +32,7 @@ def enforce_rate_limit(request: Request) -> None:
 
     now = int(time.time())
 
-    request_count = RATE_LIMIT_SCRIPT(
+    request_count = script(
         keys=[key],
         args=[now, WINDOW_SECONDS, RATE_LIMIT],
     )

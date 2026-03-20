@@ -10,6 +10,7 @@ help:
 	@echo "Available commands:"
 	@echo "  make install        Install production dependencies"
 	@echo "  make install-dev    Install dev dependencies"
+	@echo "  make install-test   Install test dependencies"
 	@echo "  make run            Run development server"
 	@echo "  make prod           Run production server"
 	@echo "  make lint           Run ruff"
@@ -33,7 +34,7 @@ venv_setup:
 	uv venv --python 3.14 --python-preference only-managed
 	source .venv/bin/activate
 
-.PHONY: install install-dev
+.PHONY: install install-dev install-test
 
 install:
 	uv lock --prerelease=allow
@@ -42,6 +43,10 @@ install:
 install-dev:
 	uv lock --prerelease=allow
 	uv sync --group dev --active
+
+install-test:
+	uv lock --prerelease=allow
+	uv sync --group test --active
 
 .PHONY: update
 update:
@@ -62,12 +67,19 @@ lint:
 format:
 	uv run ruff format $(SOURCE) 
 
+format-check:
+	uv run ruff format --check $(SOURCE)
+
 fix:
 	uv run ruff check $(SOURCE) --fix 
 	uv run ruff format $(SOURCE) 
 
 test:
-	uv run pytest 
+	uv run pytest --cov=$(SOURCE) --cov-report=term-missing
+
+.PHONY: check
+check: lint format-check
+
 
 # ----------------------------------------------------------
 # Run Application

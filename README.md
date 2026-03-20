@@ -6,7 +6,8 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
 ![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-Observability-purple)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
-![Tests](https://img.shields.io/badge/tests-pytest-green)
+![Tests](https://img.shields.io/badge/tests-pytest-100%25-coverage-green)
+
 
 ---
 
@@ -303,7 +304,7 @@ user@comp: ai_bi_backend~$ source .venv/bin/activate # activate the venv
 (ai_bi_backend) user@comp: ai_bi_backend~$ make install-dev
 (ai_bi_backend) user@comp: ai_bi_backend~$ make all # clean lint format fix test
 (ai_bi_backend) user@comp: ai_bi_backend~$ make run_local # start the API
-(ai_bi_backend) user@comp: ai_bi_backend~$ python test_setup/gen_test_table_data.py # to create products table with some dummy data
+(ai_bi_backend) user@comp: ai_bi_backend~$ python setup_scripts/gen_test_table_data.py # to create products table with some dummy data
 ```
 
 ---
